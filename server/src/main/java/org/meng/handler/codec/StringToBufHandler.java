@@ -8,7 +8,7 @@ public class StringToBufHandler extends MessageToByteEncoder<String> {
 
     @Override
     protected void encode(ChannelHandlerContext ctx, String msg, ByteBuf out) throws Exception {
-        System.out.println(msg);
+//        System.out.println("handler:" + msg);
         out.writeBytes(msg.getBytes());
     }
 }
