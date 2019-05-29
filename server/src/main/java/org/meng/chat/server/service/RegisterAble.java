@@ -1,4 +1,4 @@
-package org.meng.service;
+package org.meng.chat.server.service;
 
 import io.netty.channel.Channel;
 import io.netty.util.AttributeKey;

@@ -1,4 +1,4 @@
-package org.meng.config;
+package org.meng.chat.server.config;
 
 import lombok.Data;
 import org.springframework.boot.SpringBootConfiguration;

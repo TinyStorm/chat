@@ -1,4 +1,4 @@
-package org.meng.handler.biz;
+package org.meng.chat.server.handler.biz;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

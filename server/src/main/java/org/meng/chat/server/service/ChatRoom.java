@@ -1,9 +1,6 @@
-package org.meng.service;
+package org.meng.chat.server.service;
 
-import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.function.Consumer;
 
 /**
  * 聊天室

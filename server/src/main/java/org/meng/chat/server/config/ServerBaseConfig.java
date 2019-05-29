@@ -1,13 +1,13 @@
-package org.meng.config;
+package org.meng.chat.server.config;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.DefaultEventLoopGroup;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
-import org.meng.handler.biz.BizHandler;
-import org.meng.handler.codec.BufToStringHandler;
-import org.meng.handler.codec.StringToBufHandler;
-import org.meng.service.Hall;
+import org.meng.chat.server.handler.codec.BufToStringHandler;
+import org.meng.chat.server.handler.biz.BizHandler;
+import org.meng.chat.server.handler.codec.StringToBufHandler;
+import org.meng.chat.server.service.Hall;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
