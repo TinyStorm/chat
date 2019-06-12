@@ -13,14 +13,6 @@ public class ChatRoom extends AbstractRegister {
         super(roomName);
     }
 
-    @Override
-    public void speak(String name, String message) {
-        super.registeredCtx.forEach((s, channel) -> {
-            channel.writeAndFlush(name + ":" + message);
-        });
-    }
-
-
     public void close() {
     }
 }

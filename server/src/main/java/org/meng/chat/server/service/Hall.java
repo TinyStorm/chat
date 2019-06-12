@@ -12,7 +12,6 @@ import java.util.Map;
 @Slf4j
 public class Hall extends AbstractRegister {
     private Map<String, ChatRoom> chatRoomMap = new HashMap<>(50);//现有chat room
-    private Map<String, ChatRoom> userChatRoomMap = new HashMap<>(500);
 
 
     public Hall(String name) {
@@ -20,11 +19,12 @@ public class Hall extends AbstractRegister {
     }
 
     public void enter(String room, Channel channel) {
+        userChatRoomMap.get(channel.attr(NAME_KEY).get()).unRegister(channel);
         chatRoomMap.get(room).register(channel);
     }
 
     public void quit(Channel channel) {
-        chatRoomMap.get(channel.remoteAddress()).unRegister(channel);
+        userChatRoomMap.get(channel.attr(NAME_KEY).get()).unRegister(channel);
     }
 
 
@@ -49,27 +49,26 @@ public class Hall extends AbstractRegister {
 
     }
 
+    /**
+     * 供上层调用
+     *
+     * @param name
+     * @param message
+     */
     public void speak(String name, String message) {
-        ChatRoom chatRoom = userChatRoomMap.get(name);
+        AbstractRegister chatRoom = userChatRoomMap.get(name);
         if (chatRoom != null) {
-            chatRoom.speak(name, message);
-        } else {
-            super.registeredCtx.forEach((s, channel) -> {
-                channel.writeAndFlush(name + ":" + message);
-            });
+            //大厅也是一个聊天室,可以说话,逻辑需要和聊天室保持一致,否则不利于维护
+            chatRoom.doSpeak(name, message);
         }
-
-
     }
 
+
     public void scanUser(Channel channel) {
-        ChatRoom chatRoom = userChatRoomMap.get(channel.attr(NAME_KEY).get());
-        String users = "";
+        AbstractRegister chatRoom = userChatRoomMap.get(channel.attr(NAME_KEY).get());
         if (chatRoom != null) {
-            users = chatRoom.scanUser();
-        } else {
-            users = this.scanUser();
+            String users = chatRoom.scanUser();
+            channel.writeAndFlush(users);
         }
-        channel.writeAndFlush(users);
     }
 }

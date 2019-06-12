@@ -52,6 +52,7 @@ public class BizHandler extends ChannelInboundHandlerAdapter {
             }
             if (message.equals(SCAN_USER)) {
                 hall.scanUser(ctx.channel());
+                return;
             }
             hall.speak(ctx.channel().attr(Hall.NAME_KEY).get(), message);
 
